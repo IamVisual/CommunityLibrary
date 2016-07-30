@@ -11,4 +11,8 @@ Pod::Spec.new do |s|
   s.requires_arc   = true
   s.summary          = 'ARC and GCD Compatible Reachability Class for iOS and macOS.'
 
+  s.dependency 'AFNetworking', '~> 3.1'
+  s.dependency 'MBProgressHUD', '~> 0.9'
+  s.dependency 'PubNub', '~> 4.3'
+
 end
