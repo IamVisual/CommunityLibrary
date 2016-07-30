@@ -1,6 +1,0 @@
-framework module CommunityLibrary {
-  umbrella header "CommunityLibrary-umbrella.h"
-
-  export *
-  module * { export * }
-}
