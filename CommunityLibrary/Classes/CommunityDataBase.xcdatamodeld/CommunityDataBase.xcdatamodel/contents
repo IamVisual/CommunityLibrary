@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<model userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="10174" systemVersion="15F34" minimumToolsVersion="Xcode 7.0">
+    <entity name="ChatEntity" representedClassName="ChatEntity" syncable="YES">
+        <attribute name="chatId" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="isMute" optional="YES" attributeType="Boolean" syncable="YES"/>
+        <attribute name="lastUpdateTime" optional="YES" attributeType="Date" syncable="YES"/>
+        <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="startHostiryTimestamp" optional="YES" attributeType="Double" defaultValueString="0.0" syncable="YES"/>
+        <attribute name="unreadMessagesCount" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
+        <relationship name="chatAvatarFile" optional="YES" maxCount="1" deletionRule="Cascade" destinationEntity="FileEntity" inverseName="chatAvatar" inverseEntity="FileEntity" syncable="YES"/>
+        <relationship name="files" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="FileEntity" inverseName="chatFile" inverseEntity="FileEntity" syncable="YES"/>
+        <relationship name="lastMessage" optional="YES" maxCount="1" deletionRule="Cascade" destinationEntity="MessageEntity" inverseName="chatLastMessage" inverseEntity="MessageEntity" syncable="YES"/>
+        <relationship name="messages" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="MessageEntity" inverseName="chat" inverseEntity="MessageEntity" syncable="YES"/>
+        <relationship name="participants" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="UserEntity" inverseName="chats" inverseEntity="UserEntity" syncable="YES"/>
+    </entity>
+    <entity name="FileEntity" representedClassName="FileEntity" syncable="YES">
+        <attribute name="fileId" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
+        <attribute name="localUrl" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="thumbUrl" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="url" optional="YES" attributeType="String" syncable="YES"/>
+        <relationship name="chatAvatar" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="ChatEntity" inverseName="chatAvatarFile" inverseEntity="ChatEntity" syncable="YES"/>
+        <relationship name="chatFile" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="ChatEntity" inverseName="files" inverseEntity="ChatEntity" syncable="YES"/>
+        <relationship name="messageFile" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="MessageEntity" inverseName="file" inverseEntity="MessageEntity" syncable="YES"/>
+        <relationship name="userAvatar" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="UserEntity" inverseName="avatarFile" inverseEntity="UserEntity" syncable="YES"/>
+        <relationship name="userFile" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="UserEntity" inverseName="files" inverseEntity="UserEntity" syncable="YES"/>
+    </entity>
+    <entity name="MessageEntity" representedClassName="MessageEntity" syncable="YES">
+        <attribute name="isRead" optional="YES" attributeType="Boolean" syncable="YES"/>
+        <attribute name="messageId" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="text" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="time" optional="YES" attributeType="Date" syncable="YES"/>
+        <attribute name="type" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
+        <relationship name="chat" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="ChatEntity" inverseName="messages" inverseEntity="ChatEntity" syncable="YES"/>
+        <relationship name="chatLastMessage" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="ChatEntity" inverseName="lastMessage" inverseEntity="ChatEntity" syncable="YES"/>
+        <relationship name="file" optional="YES" maxCount="1" deletionRule="Cascade" destinationEntity="FileEntity" inverseName="messageFile" inverseEntity="FileEntity" syncable="YES"/>
+        <relationship name="user" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="UserEntity" inverseName="messages" inverseEntity="UserEntity" syncable="YES"/>
+    </entity>
+    <entity name="UserEntity" representedClassName="UserEntity" syncable="YES">
+        <attribute name="firstName" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="isOnline" optional="YES" attributeType="Boolean" syncable="YES"/>
+        <attribute name="lastName" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="pubNubId" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
+        <attribute name="serverId" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
+        <relationship name="avatarFile" optional="YES" maxCount="1" deletionRule="Cascade" destinationEntity="FileEntity" inverseName="userAvatar" inverseEntity="FileEntity" syncable="YES"/>
+        <relationship name="chats" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="ChatEntity" inverseName="participants" inverseEntity="ChatEntity" syncable="YES"/>
+        <relationship name="files" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="FileEntity" inverseName="userFile" inverseEntity="FileEntity" syncable="YES"/>
+        <relationship name="messages" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="MessageEntity" inverseName="user" inverseEntity="MessageEntity" syncable="YES"/>
+    </entity>
+    <elements>
+        <element name="ChatEntity" positionX="-63" positionY="-18" width="128" height="210"/>
+        <element name="FileEntity" positionX="-54" positionY="-9" width="128" height="180"/>
+        <element name="MessageEntity" positionX="-36" positionY="9" width="128" height="180"/>
+        <element name="UserEntity" positionX="-18" positionY="27" width="128" height="180"/>
+    </elements>
+</model>
