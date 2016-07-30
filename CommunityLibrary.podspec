@@ -6,6 +6,6 @@ Pod::Spec.new do |s|
   s.license          = { :type => 'MIT', :file => 'LICENSE' }
   s.author           = { 'Aleksandr Vnukov' => 'aleksandr.vnukov.jos@gmail.com' }
   s.requires_arc   = true
-  s.source_files = 'CommunityLibrary/Classes/**/*'
+  #s.source_files = 'CommunityLibrary/Classes/**/*'
 
 end
